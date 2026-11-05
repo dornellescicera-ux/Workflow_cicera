@@ -1,0 +1,139 @@
+## Agente Inteligente de Cobranzas con RAG ##
+
+## Descripción ##
+
+Este proyecto implementa un agente autónomo de cobranzas utilizando n8n, RAG y modelos de lenguaje.
+
+El agente recibe consultas relacionadas con pagos, facturas vencidas, medios de pago y convenios.
+
+Antes de responder, consulta una base documental indexada mediante embeddings y almacenada en una Vector Store.
+
+## Caso de Negocio ##
+
+Las consultas frecuentes de clientes deudores ocupan tiempo operativo del equipo de cobranzas.
+
+El agente automatiza respuestas relacionadas con:
+
+Medios de pago
+Facturas
+Convenios
+Mora
+Horarios de atención
+Información general de cobranzas
+ROI Estimado
+Situación actual
+100 consultas mensuales.
+
+Tiempo promedio de gestión:
+
+5 minutos por consulta.
+
+Tiempo mensual:
+
+100 × 5 = 500 minutos
+
+500 / 60 = 8.3 horas
+
+Costo operador:
+
+USD 10 por hora.
+
+Costo mensual:
+
+USD 83
+
+## Solución automatizada ##
+
+Herramientas:
+
+n8n
+Supabase
+Groq
+GitHub
+Costo:
+
+USD 0
+
+Beneficio
+Reducción estimada superior al 80% en tareas repetitivas.
+
+## Arquitectura ## 
+GitHub FAQ ↓ Default Data Loader ↓ Embeddings Cohere ↓ Supabase Vector Store ↓ Retriever ↓ AI Agent ↓ Groq Chat Model ↓ Respuesta Telegram
+
+Justificación del Modelo
+
+Se utilizó Gemini porque:
+
+Posee muy baja latencia.
+Integra fácilmente con n8n.
+Dispone de uso gratuito.
+
+Justificación del Vector Store
+
+Se utilizó Supabase porque:
+
+Permite almacenar embeddings.
+Es compatible con n8n.
+Posee plan gratuito.
+Facilita búsquedas semánticas eficientes.
+
+¿Por qué RAG y no un nodo IA simple?
+
+Un modelo sin RAG respondería utilizando únicamente conocimiento general.
+
+En cobranzas esto genera riesgos:
+
+Inventar políticas.
+Inventar descuentos.
+Inventar acuerdos de pago.
+Brindar información incorrecta.
+RAG garantiza respuestas basadas únicamente en la documentación validada.
+
+Manejo de errores
+
+Error 1
+
+La Vector Store no devuelve resultados.
+
+Acción:
+
+Derivar la consulta a un operador humano.
+
+Error 2
+
+El modelo devuelve respuesta vacía o error.
+
+Acción:
+
+Informar al usuario que existe un inconveniente temporal.
+
+System Prompt
+
+Eres un asistente virtual especializado en cobranzas.
+
+OBJETIVO
+
+Responder consultas relacionadas con pagos, facturas, vencimientos y medios de pago.
+
+REGLAS
+
+1. Utiliza exclusivamente la información recuperada desde la base documental.
+
+2. Nunca inventes información.
+
+3. Nunca inventes saldos.
+
+4. Nunca prometas descuentos.
+
+5. Nunca prometas refinanciaciones.
+
+6. No brindes asesoramiento legal.
+
+7. Mantén respuestas breves y profesionales.
+
+8. Si la respuesta no se encuentra en el contexto responde:
+
+"No encontré información suficiente para ayudarte. Un representante continuará la gestión."
+
+9. Si el usuario solicita asistencia humana debes derivar el caso.
+
