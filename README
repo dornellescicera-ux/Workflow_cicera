@@ -1,139 +1,194 @@
-## Agente Inteligente de Cobranzas con RAG ##
+Agente Autónomo de Cobranzas con RAG
 
-## Descripción ##
+Descripción del Proyecto
 
-Este proyecto implementa un agente autónomo de cobranzas utilizando n8n, RAG y modelos de lenguaje.
+Este proyecto implementa un agente autónomo de cobranzas utilizando n8n, Inteligencia Artificial y arquitectura RAG (Retrieval-Augmented Generation).
 
-El agente recibe consultas relacionadas con pagos, facturas vencidas, medios de pago y convenios.
+El objetivo es automatizar la atención de clientes con deudas pendientes permitiendo consultar información sobre:
 
-Antes de responder, consulta una base documental indexada mediante embeddings y almacenada en una Vector Store.
+Estado de deuda.
+Medios de pago disponibles.
+Planes de financiación.
+Fechas de vencimiento.
+Preguntas frecuentes del proceso de cobranza.
 
-## Caso de Negocio ##
+El conocimiento utilizado por el agente se almacena en una base vectorial en Supabase, permitiendo recuperar información relevante antes de generar cada respuesta.
 
-Las consultas frecuentes de clientes deudores ocupan tiempo operativo del equipo de cobranzas.
+Caso de Negocio
 
-El agente automatiza respuestas relacionadas con:
+Actualmente los operadores de cobranzas deben responder repetidamente preguntas similares de clientes:
 
-Medios de pago
-Facturas
-Convenios
-Mora
-Horarios de atención
-Información general de cobranzas
+¿Cuál es mi deuda?
+¿Cómo puedo pagar?
+¿Qué métodos de pago aceptan?
+¿Puedo financiar la deuda?
+¿Dónde solicito un comprobante?
+
+Estas consultas consumen tiempo operativo y generan costos para la empresa.
+
+La automatización mediante un agente conversacional permite responder estas consultas de forma inmediata las 24 horas del día.
+
 ROI Estimado
 Situación actual
-100 consultas mensuales.
+100 consultas diarias.
+Tiempo promedio por consulta: 3 minutos.
+Total: 300 minutos diarios.
 
-Tiempo promedio de gestión:
+300 minutos = 5 horas por día.
 
-5 minutos por consulta.
+Situación automatizada
 
-Tiempo mensual:
+El agente responde aproximadamente el 80% de las consultas frecuentes.
 
-100 × 5 = 500 minutos
+Tiempo ahorrado:
 
-500 / 60 = 8.3 horas
+5 horas diarias x 80%
+4 horas ahorradas por día
+Cálculo mensual
+4 horas × 22 días laborales
+88 horas ahorradas por mes
 
-Costo operador:
+Si el costo promedio de un operador es USD 8/hora:
 
-USD 10 por hora.
+88 × 8 = USD 704 mensuales
+Costo de implementación
+n8n: gratuito/self-hosted
+Supabase: plan gratuito
+Gemini/OpenAI: bajo consumo
 
-Costo mensual:
+ROI positivo desde el primer mes de operación.
 
-USD 83
+Arquitectura de la Solución
+Disparadores
 
-## Solución automatizada ##
+El workflow cuenta con dos entradas:
 
-Herramientas:
+1. Telegram Trigger
 
-n8n
-Supabase
-Groq
-GitHub
-Costo:
+Recibe consultas de clientes directamente desde Telegram.
 
-USD 0
+2. Webhook
 
-Beneficio
-Reducción estimada superior al 80% en tareas repetitivas.
+Permite recibir consultas desde formularios web o aplicaciones externas.
 
-## Arquitectura ## 
-GitHub FAQ ↓ Default Data Loader ↓ Embeddings Cohere ↓ Supabase Vector Store ↓ Retriever ↓ AI Agent ↓ Groq Chat Model ↓ Respuesta Telegram
+Arquitectura RAG
 
-Justificación del Modelo
+Para proporcionar respuestas contextualizadas se utiliza:
 
-Se utilizó Gemini porque:
+Vector Store
+Supabase Vector Database
+Modelo de Embeddings
+OpenAI Embeddings
+o Gemini Embeddings (según configuración)
+Flujo
+El usuario envía una consulta.
+La consulta genera embeddings.
+Supabase busca documentos similares.
+Se recupera el contexto relevante.
+El contexto es enviado al AI Agent.
+El agente genera la respuesta.
+Modelo de IA Utilizado
 
-Posee muy baja latencia.
-Integra fácilmente con n8n.
-Dispone de uso gratuito.
+Se eligió Gemini porque:
 
-Justificación del Vector Store
+Tiene plan gratuito.
+Fácil integración con n8n.
+Baja latencia.
+Buen desempeño en tareas conversacionales.
+Menor costo para ambientes académicos.
 
-Se utilizó Supabase porque:
+También podría utilizarse OpenAI GPT-4o u Ollama para un despliegue local.
 
-Permite almacenar embeddings.
-Es compatible con n8n.
-Posee plan gratuito.
-Facilita búsquedas semánticas eficientes.
+¿Por qué utilizar RAG?
 
-¿Por qué RAG y no un nodo IA simple?
+Un nodo de IA simple trabaja únicamente con el conocimiento del modelo.
 
-Un modelo sin RAG respondería utilizando únicamente conocimiento general.
+En cobranzas la información cambia constantemente:
 
-En cobranzas esto genera riesgos:
+Políticas de pago.
+Preguntas frecuentes.
+Procedimientos de gestión.
+Información de clientes.
 
-Inventar políticas.
-Inventar descuentos.
-Inventar acuerdos de pago.
-Brindar información incorrecta.
-RAG garantiza respuestas basadas únicamente en la documentación validada.
+Mediante RAG el agente consulta información actualizada almacenada en Supabase antes de responder.
 
-Manejo de errores
+Esto permite:
 
-Error 1
+Menor alucinación del modelo.
+Información actualizada.
+Fácil mantenimiento sin reentrenamiento.
+Manejo de Errores
+Error 1: Fallo en Supabase
 
-La Vector Store no devuelve resultados.
+Posible problema:
 
-Acción:
+Timeout.
+Conexión perdida.
+Consulta sin resultados.
 
-Derivar la consulta a un operador humano.
+Solución:
 
-Error 2
+Nodo IF que verifica si se recuperó contexto.
 
-El modelo devuelve respuesta vacía o error.
+Si no existe contexto:
 
-Acción:
+"Lo siento, en este momento no puedo acceder a la base de conocimiento. Intente nuevamente más tarde."
 
-Informar al usuario que existe un inconveniente temporal.
+Error 2: Respuesta vacía del LLM
 
-System Prompt
+Posible problema:
 
+Error del proveedor IA.
+Respuesta nula.
+
+Solución:
+
+Nodo IF posterior al AI Agent.
+
+Si la respuesta es nula:
+
+"Existe un inconveniente temporal. Un operador revisará su consulta."
+
+System Prompt del Agente
+Plain Text
 Eres un asistente virtual especializado en cobranzas.
-
-OBJETIVO
-
-Responder consultas relacionadas con pagos, facturas, vencimientos y medios de pago.
-
-REGLAS
-
-1. Utiliza exclusivamente la información recuperada desde la base documental.
-
-2. Nunca inventes información.
-
-3. Nunca inventes saldos.
-
-4. Nunca prometas descuentos.
-
-5. Nunca prometas refinanciaciones.
-
-6. No brindes asesoramiento legal.
-
-7. Mantén respuestas breves y profesionales.
-
-8. Si la respuesta no se encuentra en el contexto responde:
-
-"No encontré información suficiente para ayudarte. Un representante continuará la gestión."
-
-9. Si el usuario solicita asistencia humana debes derivar el caso.
-
+ 
+Tu función es responder únicamente utilizando la información proporcionada por la base de conocimiento recuperada desde el sistema RAG.
+ 
+Reglas:
+ 
+1. Responde de manera cordial y profesional.
+2. Utiliza únicamente la información recuperada.
+3. Si la información no está disponible, indícalo claramente.
+4. No inventes datos.
+5. No generes información financiera que no esté presente en el contexto.
+6. Prioriza responder preguntas sobre:
+- deudas
+- medios de pago
+- financiación
+- vencimientos
+- comprobantes
+- preguntas frecuentes
+ 
+7. Si el usuario solicita información inexistente en el contexto responde:
+ 
+"No dispongo de información suficiente para responder esa consulta."
+ 
+8. Mantén respuestas breves y claras.
+ 
+Contexto:
+{{ $json.context }}
+ 
+Pregunta:
+{{ $json.question }}
+Estructura del Repositorio
+Plain Text
+agente-cobranzas-rag/
+│
+├── README.md
+├── workflow-agente-rag.json
+│
+└── capturas/
+├── workflow.png
+├── ejecucion-ok.png
+└── supabase-rag.png
