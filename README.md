@@ -12,6 +12,16 @@ Fechas de vencimiento.
 Preguntas frecuentes del proceso de cobranza.
 El conocimiento utilizado por el agente se almacena en una base vectorial en Supabase, permitiendo recuperar información relevante antes de generar cada respuesta.
 
+## Caracteristicas
+
+Atención automática de clientes mediante Telegram.
+Respuestas generadas con Google Gemini.
+Recuperación de información mediante RAG.
+Base de conocimiento vectorial.
+Integración con Google Sheets.
+Gestión de preguntas frecuentes.
+Arquitectura no-code con n8n.
+
 ## Caso de Negocio
 Actualmente los operadores de cobranzas deben responder repetidamente preguntas similares de clientes:
 
