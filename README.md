@@ -20,8 +20,18 @@ Recuperación de información mediante RAG.
 Base de conocimiento vectorial.
 Integración con Google Sheets.
 Gestión de preguntas frecuentes.
-Arquitectura no-code con n8n.}
+Arquitectura no-code con n8n.
 Uso de Telegram como canal de comunicación debido a su rápida implementación y facilidad de integración, evitando los tiempos de aprobación y los requisitos burocráticos asociados a la API oficial de WhatsApp Business.
+
+## Justificación de elección de n8n Cloud
+Se propone utilizar n8n Cloud para implementar el agente de cobranzas con IA, considerando que el volumen de consultas será reducido.
+Sus principales ventajas son:
+Menor mantenimiento: no requiere administrar servidores ni instalaciones locales.
+Disponibilidad: no depende de una computadora encendida permanentemente.
+Optimización de recursos: permite reducir la dedicación de IT y concentrarse en el desarrollo del agente.
+Escalabilidad: permite ampliar la capacidad si aumenta la demanda.
+Conclusión: Para un agente de bajo volumen, n8n Cloud ofrece una solución práctica y eficiente, reduciendo la complejidad técnica y los costos operativos indirectos.
+La implementación estará sujeta a la aprobación de Seguridad de la Información y las políticas corporativas de tratamiento de datos.
 
 ## Caso de Negocio
 Actualmente los operadores de cobranzas deben responder repetidamente preguntas similares de clientes:
@@ -88,6 +98,7 @@ Supabase busca documentos similares.
 Se recupera el contexto relevante.
 El contexto es enviado al AI Agent.
 El agente genera la respuesta.
+
 **Modelo de IA Utilizado**
 Se eligió Gemini debido a:
 
