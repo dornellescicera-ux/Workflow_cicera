@@ -163,6 +163,26 @@ Pregunta:
 
 # Captura workflow completo 
 <img width="1677" height="788" alt="Captura 1" src="https://github.com/user-attachments/assets/ff76e7dc-5267-4467-b526-609804e0f8c5" />
+ 
+ # Ingesta de documentos y embeddings
+
+ <img width="957" height="361" alt="Captura de pantalla 2026-11-06 163125" src="https://github.com/user-attachments/assets/c8b99e49-ca5a-4639-9660-8f11f6267811" />
+
+# Arquitectura del Asistente de Cobranzas
+
+<img width="1192" height="481" alt="Captura de pantalla 2026-11-06 163322" src="https://github.com/user-attachments/assets/57ec4573-dda8-426b-916d-0e207587dc57" />
+
+# Configuración del agente IA 
+
+<img width="1192" height="481" alt="Captura de pantalla 2026-11-06 163322" src="https://github.com/user-attachments/assets/da7ef48c-1d0f-4202-86fa-fbf85ae43b6b" />
+
+# Chat con el bot 
+
+ <img width="1179" height="2556" alt="Image" src="https://github.com/user-attachments/assets/54580b8b-6974-4d0b-9677-0c92b1875853" />
+
+
+
+
 
 
 
