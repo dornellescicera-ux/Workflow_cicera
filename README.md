@@ -1,10 +1,10 @@
-Agente Autónomo de Cobranzas con RAG
+#Agente Autónomo de Cobranzas con RAG#
 
-Descripción del Proyecto
+##Descripción del Proyecto##
 
 Este proyecto implementa un agente autónomo de cobranzas utilizando n8n, Inteligencia Artificial y arquitectura RAG (Retrieval-Augmented Generation).
 
-El objetivo es automatizar la atención de clientes con deudas pendientes permitiendo consultar información sobre:
+**El objetivo es automatizar la atención de clientes con deudas pendientes permitiendo consultar información sobre:**
 
 Estado de deuda.
 Medios de pago disponibles.
@@ -14,9 +14,9 @@ Preguntas frecuentes del proceso de cobranza.
 
 El conocimiento utilizado por el agente se almacena en una base vectorial en Supabase, permitiendo recuperar información relevante antes de generar cada respuesta.
 
-Caso de Negocio
+##Caso de Negocio##
 
-Actualmente los operadores de cobranzas deben responder repetidamente preguntas similares de clientes:
+**Actualmente los operadores de cobranzas deben responder repetidamente preguntas similares de clientes:**
 
 ¿Cuál es mi deuda?
 ¿Cómo puedo pagar?
@@ -28,7 +28,7 @@ Estas consultas consumen tiempo operativo y generan costos para la empresa.
 
 La automatización mediante un agente conversacional permite responder estas consultas de forma inmediata las 24 horas del día.
 
-ROI Estimado
+**ROI Estimado**
 Situación actual
 100 consultas diarias.
 Tiempo promedio por consulta: 3 minutos.
@@ -40,7 +40,7 @@ Situación automatizada
 
 El agente responde aproximadamente el 80% de las consultas frecuentes.
 
-Tiempo ahorrado:
+**Tiempo ahorrado:**
 
 5 horas diarias x 80%
 4 horas ahorradas por día
@@ -48,7 +48,7 @@ Cálculo mensual
 4 horas × 22 días laborales
 88 horas ahorradas por mes
 
-Si el costo promedio de un operador es USD 8/hora:
+**Si el costo promedio de un operador es USD 8/hora:**
 
 88 × 8 = USD 704 mensuales
 Costo de implementación
@@ -56,9 +56,9 @@ n8n: gratuito/self-hosted
 Supabase: plan gratuito
 Gemini/OpenAI: bajo consumo
 
-ROI positivo desde el primer mes de operación.
+**ROI positivo desde el primer mes de operación.**
 
-Arquitectura de la Solución
+##Arquitectura de la Solución##
 Disparadores
 
 El workflow cuenta con dos entradas:
@@ -71,7 +71,7 @@ Recibe consultas de clientes directamente desde Telegram.
 
 Permite recibir consultas desde formularios web o aplicaciones externas.
 
-Arquitectura RAG
+##Arquitectura RAG##
 
 Para proporcionar respuestas contextualizadas se utiliza:
 
@@ -80,14 +80,14 @@ Supabase Vector Database
 Modelo de Embeddings
 OpenAI Embeddings
 o Gemini Embeddings (según configuración)
-Flujo
+**Flujo**
 El usuario envía una consulta.
 La consulta genera embeddings.
 Supabase busca documentos similares.
 Se recupera el contexto relevante.
 El contexto es enviado al AI Agent.
 El agente genera la respuesta.
-Modelo de IA Utilizado
+**Modelo de IA Utilizado**
 
 Se eligió Gemini porque:
 
@@ -99,7 +99,7 @@ Menor costo para ambientes académicos.
 
 También podría utilizarse OpenAI GPT-4o u Ollama para un despliegue local.
 
-¿Por qué utilizar RAG?
+**¿Por qué utilizar RAG?**
 
 Un nodo de IA simple trabaja únicamente con el conocimiento del modelo.
 
@@ -117,7 +117,7 @@ Esto permite:
 Menor alucinación del modelo.
 Información actualizada.
 Fácil mantenimiento sin reentrenamiento.
-Manejo de Errores
+##Manejo de Errores##
 Error 1: Fallo en Supabase
 
 Posible problema:
@@ -149,7 +149,7 @@ Si la respuesta es nula:
 
 "Existe un inconveniente temporal. Un operador revisará su consulta."
 
-System Prompt del Agente
+##System Prompt del Agente##
 Plain Text
 Eres un asistente virtual especializado en cobranzas.
  
@@ -181,14 +181,4 @@ Contexto:
  
 Pregunta:
 {{ $json.question }}
-Estructura del Repositorio
-Plain Text
-agente-cobranzas-rag/
-│
-├── README.md
-├── workflow-agente-rag.json
-│
-└── capturas/
-├── workflow.png
-├── ejecucion-ok.png
-└── supabase-rag.png
+
