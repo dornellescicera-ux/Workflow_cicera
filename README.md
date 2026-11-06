@@ -190,6 +190,8 @@ Pregunta:
 
  <img width="1179" height="2556" alt="Image" src="https://github.com/user-attachments/assets/54580b8b-6974-4d0b-9677-0c92b1875853" />
 
+## Autor
+Desarrollado por Cicera Dornelles.
 
 
 
