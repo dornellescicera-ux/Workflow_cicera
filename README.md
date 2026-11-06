@@ -20,7 +20,8 @@ Recuperación de información mediante RAG.
 Base de conocimiento vectorial.
 Integración con Google Sheets.
 Gestión de preguntas frecuentes.
-Arquitectura no-code con n8n.
+Arquitectura no-code con n8n.}
+Uso de Telegram como canal de comunicación debido a su rápida implementación y facilidad de integración, evitando los tiempos de aprobación y los requisitos burocráticos asociados a la API oficial de WhatsApp Business.
 
 ## Caso de Negocio
 Actualmente los operadores de cobranzas deben responder repetidamente preguntas similares de clientes:
