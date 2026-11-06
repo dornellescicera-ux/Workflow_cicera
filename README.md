@@ -160,3 +160,9 @@ Contexto:
 
 Pregunta:
 {{ $json.question }}
+
+# Captura workflow completo 
+<img width="1677" height="788" alt="Captura 1" src="https://github.com/user-attachments/assets/ff76e7dc-5267-4467-b526-609804e0f8c5" />
+
+
+
